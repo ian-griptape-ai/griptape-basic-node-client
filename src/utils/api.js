@@ -25,11 +25,15 @@ async function createStructureRun(data) {
     }
 }
 
-async function pollEventEndpoint(runId) {
+async function pollEventEndpoint(runId, offset) {
     try {
         const response = await axios.get(`${GRIPTAPE_API_URL}/structure-runs/${runId}/events`, {
             headers: {
                 'Authorization': `Bearer ${API_KEY}`
+            },
+            params: {
+                'offset': offset,
+                'limit': 100
             }
         });
         return response.data;
