@@ -31,7 +31,8 @@ griptape-node-app
 3. Create a `.env` file in the root directory and add your Griptape API key and endpoint URLs:
    ```
    GRIPTAPE_API_KEY=your_api_key
-   GRIPTAPE_API_URL=https://api.griptape.ai
+   GRIPTAPE_API_URL=https://cloud.griptape.ai/api
+   STRUCTURE_ID=the ID of the structure that you wish to call
    ```
 
 ## Usage
