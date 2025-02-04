@@ -1,10 +1,9 @@
-require('dotenv').config();
 const { createStructureRun, pollEventEndpoint, getStructureRunOutput } = require('./api');
 
-async function runStructure(prompt) {
+async function runStructure(prompt, apiKey, structureId, griptapeApiUrl) {
     try {
         // Initialize the Griptape API client and create a structure run
-        const runId = await createStructureRun({"args": [prompt]});
+        const runId = await createStructureRun({"args": [prompt]}, apiKey, structureId, griptapeApiUrl);
 
         console.log('Run created:', runId);
         
@@ -13,7 +12,7 @@ async function runStructure(prompt) {
         let finished = false;
         let offset = 0;
         do {
-            result = await pollEventEndpoint(runId, offset);
+            result = await pollEventEndpoint(runId, offset, apiKey, griptapeApiUrl);
             offset = result.next_offset;
             await new Promise(resolve => setTimeout(resolve, 250)); // Poll every 5 seconds
             if (result.events.length > 0) { 
@@ -21,7 +20,7 @@ async function runStructure(prompt) {
             }
         } while (finished === false);
         
-        const output = await getStructureRunOutput(runId);
+        const output = await getStructureRunOutput(runId, apiKey, griptapeApiUrl);
 
         return output.output.value;
 

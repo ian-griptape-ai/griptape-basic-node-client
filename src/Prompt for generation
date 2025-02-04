@@ -1,0 +1,7 @@
+Create a browser extension for Chrome.
+
+The UI should comprise a panel that is displayed to the right of the browser window. This panel should not float on top of the browser viewport, but instead be inside the viewport aligned against the right edge. The panel should be resizable. The panel should have the griptape logo at the top, a field to enter a Griptape Cloud API key, a dropdown selector with two options, "question" and "quiz me", and a submit button. The panel should be styled as white text on the black background.
+
+When the submit button is clicked, the extension should read the content of the current web page, convert it to markdown and send this to a function. That function will return text content. Oncee return content should be displayed in the lower part of the panel in a scrollable content area.
+
+The user should then be able to move to a new webpage, or select another dropdown option, click the button again and the content in the lower area should refresh.
