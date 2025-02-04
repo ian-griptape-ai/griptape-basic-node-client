@@ -1,0 +1,15 @@
+{
+  "name": "griptape-node-app",
+  "version": "1.0.0",
+  "description": "A Node.js application that interacts with the Griptape API to initiate structure runs and poll for results.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
