@@ -2,21 +2,19 @@
 
 require('dotenv').config();
 
-const GRIPTAPE_API_URL = process.env.GRIPTAPE_API_URL;
-const API_KEY = process.env.GRIPTAPE_API_KEY;
-const STRUCTURE_ID = process.env.STRUCTURE_ID;
+//const GRIPTAPE_API_URL = process.env.GRIPTAPE_API_URL;
 
-async function createStructureRun(data) {
+async function createStructureRun(data, apiKey, structureId, griptapeApiUrl) {
     try {
-        const url = new URL(`${GRIPTAPE_API_URL}/structures/${STRUCTURE_ID}/runs`);
+        const url = new URL(`${griptapeApiUrl}/structures/${structureId}/runs`);
         url.search = new URLSearchParams({
-            'path': JSON.stringify({ 'structure_id': `${STRUCTURE_ID}` })
+            'path': JSON.stringify({ 'structure_id': `${structureId}` })
         });
 
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${API_KEY}`,
+                'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -34,9 +32,9 @@ async function createStructureRun(data) {
     }
 }
 
-async function pollEventEndpoint(runId, offset) {
+async function pollEventEndpoint(runId, offset, apiKey, griptapeApiUrl) {
     try {
-        const url = new URL(`${GRIPTAPE_API_URL}/structure-runs/${runId}/events`);
+        const url = new URL(`${griptapeApiUrl}/structure-runs/${runId}/events`);
         url.search = new URLSearchParams({
             'offset': offset,
             'limit': 100
@@ -45,7 +43,7 @@ async function pollEventEndpoint(runId, offset) {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${API_KEY}`
+                'Authorization': `Bearer ${apiKey}`
             }
         });
 
@@ -61,13 +59,13 @@ async function pollEventEndpoint(runId, offset) {
     }
 }
 
-async function getStructureRunOutput(runId) {
+async function getStructureRunOutput(runId, apiKey, griptapeApiUrl) {
     try {
-        const url = `${GRIPTAPE_API_URL}/structure-runs/${runId}`;
+        const url = `${griptapeApiUrl}/structure-runs/${runId}`;
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${API_KEY}`,
+                'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
             }
         });
