@@ -8,7 +8,6 @@ const STRUCTURE_ID = process.env.STRUCTURE_ID;
 const main = async () => {
     try {
         const results = await runStructure('write me a poem', API_KEY, STRUCTURE_ID, GRIPTAPE_API_URL);
-
         console.log('Output:', results);
     } catch (error) {
         console.error('Error:', error.message);

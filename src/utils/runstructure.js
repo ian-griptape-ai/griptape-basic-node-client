@@ -11,18 +11,28 @@ async function runStructure(prompt, apiKey, structureId, griptapeApiUrl) {
         let result;
         let finished = false;
         let offset = 0;
+        let text_chunks_concat ='';
         do {
             result = await pollEventEndpoint(runId, offset, apiKey, griptapeApiUrl);
             offset = result.next_offset;
-            await new Promise(resolve => setTimeout(resolve, 250)); // Poll every 5 seconds
+            result.events.forEach(event => {
+                if (event.type === "TextChunkEvent") {
+                    process.stdout.write(event.payload.token)
+                    text_chunks_concat += event.payload.token;
+                }
+            });
+            await new Promise(resolve => setTimeout(resolve, 250)); // Poll every .25 seconds
             if (result.events.length > 0) { 
-                if (result.events[result.events.length - 1].type === 'StructureRunCompleted') {finished = true};
+                if (result.events[result.events.length - 1].type === 'StructureRunCompleted') {
+                    finished = true
+                    process.stdout.write("\n")
+                };
             }
         } while (finished === false);
         
         const output = await getStructureRunOutput(runId, apiKey, griptapeApiUrl);
 
-        return output.output.value;
+        return text_chunks_concat;
 
     } catch (error) {
         console.error('Error:', error.message);
