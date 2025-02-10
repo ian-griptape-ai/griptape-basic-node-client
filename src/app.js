@@ -1,5 +1,4 @@
 const { runStructure } = require('./utils/runstructure');
-const { deleteThreadByAlias } = require('./utils/threads');
 require('dotenv').config();
 
 const GRIPTAPE_API_URL = process.env.GRIPTAPE_API_URL;

@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 async function getThreadIdByAlias(alias, apiKey, griptapeApiUrl) {
     try {
         const url = new URL(`${griptapeApiUrl}/threads`);

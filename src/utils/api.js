@@ -1,7 +1,5 @@
 // This file contains functions for interacting with the Griptape API.
 
-require('dotenv').config();
-
 async function createStructureRun(data, apiKey, structureId, griptapeApiUrl) {
     try {
         const url = new URL(`${griptapeApiUrl}/structures/${structureId}/runs`);
