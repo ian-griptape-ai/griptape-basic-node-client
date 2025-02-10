@@ -28,10 +28,10 @@ griptape-node-app
    npm install
    ```
 
-3. Create a `.env` file in the root directory and add your Griptape API key and endpoint URLs:
+3. Create a `.env` based on the `example.env` file in the root directory and add your Griptape API key and endpoint URLs:
    ```
-   GRIPTAPE_API_KEY=your_Griptape_Cloud_api_key
    GRIPTAPE_API_URL=https://cloud.griptape.ai/api
+   GRIPTAPE_API_KEY=your_Griptape_Cloud_api_key
    STRUCTURE_ID=the Structure ID of the Structure that you wish to invoke
    ```
 
