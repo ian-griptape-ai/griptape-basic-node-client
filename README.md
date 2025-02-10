@@ -10,7 +10,7 @@ griptape-node-app
 │   ├── app.js          # Entry point of the application
 │   └── utils
 │       └── api.js      # Functions for interacting with the Griptape API
-│       └── threads.js  # Functions to interacting with Conversation Threads via the Griptape API
+│       └── threads.js  # Functions to interact with Conversation Threads via the Griptape API
 ├── package.json        # npm configuration file
 ├── env.example         # Example file containing environment variables for configuration
 └── README.md           # Project documentation
