@@ -2,8 +2,6 @@
 
 require('dotenv').config();
 
-//const GRIPTAPE_API_URL = process.env.GRIPTAPE_API_URL;
-
 async function createStructureRun(data, apiKey, structureId, griptapeApiUrl) {
     try {
         const url = new URL(`${griptapeApiUrl}/structures/${structureId}/runs`);
