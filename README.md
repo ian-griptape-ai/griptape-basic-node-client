@@ -48,7 +48,62 @@ node src/app.js
 This application utilizes the Griptape API to perform the following actions:
 
 - **Create a Structure Run**: Initiates a structure run using the Griptape API.
-- **Poll for Event Status**: Continuously checks the status of the structure run until it is completed, then retrieves and prints the results.
+- **Listen for Events**: Streams events from the structure run until it is completed, then retrieves and prints the results.
+- **Get Thread ID by Alias**: Retrieves the thread ID associated with a given alias.
+- **Delete Thread by ID**: Deletes a thread using its ID.
+- **Delete Thread by Alias**: Deletes a thread using its alias.
+
+### Functions
+
+#### createStructureRun
+
+Initiates a structure run using the Griptape API.
+
+```javascript
+async function createStructureRun(data, apiKey, structureId, griptapeApiUrl) {
+    // Implementation
+}
+```
+
+#### listenForEvents
+
+Streams events from the structure run until it is completed.
+
+```javascript
+async function listenForEvents(runId, apiKey, griptapeApiUrl) {
+    // Implementation
+}
+```
+
+#### getThreadIdByAlias
+
+Retrieves the thread ID associated with a given alias.
+
+```javascript
+async function getThreadIdByAlias(alias, apiKey, griptapeApiUrl) {
+    // Implementation
+}
+```
+
+#### deleteThreadById
+
+Deletes a thread using its ID.
+
+```javascript
+async function deleteThreadById(threadId, apiKey, griptapeApiUrl) {
+    // Implementation
+}
+```
+
+#### deleteThreadByAlias
+
+Deletes a thread using its alias.
+
+```javascript
+async function deleteThreadByAlias(alias, apiKey, griptapeApiUrl) {
+    // Implementation
+}
+```
 
 ## License
 

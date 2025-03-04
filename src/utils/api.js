@@ -73,6 +73,7 @@ async function listenForEvents(runId, apiKey, griptapeApiUrl) {
                 if (buffer.length) {
                   buffer = processBuffer(buffer);
                 }
+                console.log("\n\nStream complete\n");
                 return concatenatedText;
               }
               buffer += decoder.decode(value)
