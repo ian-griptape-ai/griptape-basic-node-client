@@ -40,6 +40,7 @@ async function listenForEvents(runId, apiKey, griptapeApiUrl) {
         const decoder = new TextDecoder("utf-8");
         let concatenatedText = "";
         let buffer = "";
+        let waitingForFirstToken = true;
 
         function processBuffer(bufferStr) {
             const parts = bufferStr.split("\n\n");
@@ -56,10 +57,15 @@ async function listenForEvents(runId, apiKey, griptapeApiUrl) {
             let eventName = "";
             let dataStr = "";
             lines.forEach(line => {
+                if (waitingForFirstToken) { process.stdout.write(".") };
                 if (line.startsWith("data:")) {
                 dataStr += line.substring("data:".length).trim();
                 const eventData = JSON.parse(dataStr);
                 if (eventData.payload.token !== undefined) {
+                    if (waitingForFirstToken) {
+                        process.stdout.write("\n\n");
+                        waitingForFirstToken = false
+                    }
                     process.stdout.write(eventData.payload.token) 
                     concatenatedText += eventData.payload.token;
                 }
