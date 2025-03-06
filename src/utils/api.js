@@ -73,18 +73,31 @@ async function listenForEvents(runId, apiKey, griptapeApiUrl) {
             });
         }
 
-        while (true) {
-            const { value, done } = await reader.read();
-            if (done) {
-                if (buffer.length) {
-                  buffer = processBuffer(buffer);
+        const TIMEOUT_MS = 10000; // Set timeout duration (10 seconds)
+
+        try {
+            while (true) {
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error("Read operation timed out")), TIMEOUT_MS)
+                );
+
+                const { value, done } = await Promise.race([reader.read(), timeoutPromise]);
+                if (done) {
+                    if (buffer.length) {
+                    buffer = processBuffer(buffer);
+                    }
+                    console.log("\n\nStream complete\n");
+                    return concatenatedText;
                 }
-                console.log("\n\nStream complete\n");
-                return concatenatedText;
-              }
-              buffer += decoder.decode(value)
-              buffer = processBuffer(buffer);
+                buffer += decoder.decode(value)
+                buffer = processBuffer(buffer);
+            }
         }
+        catch (error) {
+            console.error("Loop exited due to:", error.message);
+            return concatenatedText;
+        }
+
     } catch (error) {
         console.error('Error listening for events:', error);
         throw error;
